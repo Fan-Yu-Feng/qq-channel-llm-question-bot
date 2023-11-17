@@ -56,6 +56,12 @@ ChannelSdk模块是QQ频道的SDK（软件开发工具包），用于与QQ频道
 
 
 
+## 运行截图
+
+![image-20231117203454855](https://fanyohong-blog.oss-cn-shenzhen.aliyuncs.com/image/image-20231117203454855.png)
+
+
+
 
 
 ## 参考使用
