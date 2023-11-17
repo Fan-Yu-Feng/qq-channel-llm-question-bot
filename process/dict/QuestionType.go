@@ -10,7 +10,6 @@ const (
 	MathProblem     QuestionType = "数学题"
 	HistoryMystery  QuestionType = "历史谜题"
 	MovieLiterature QuestionType = "电影与文学"
-	AnimalWorld     QuestionType = "动物界"
 	Riddles         QuestionType = "谜语与字谜"
 	Technology      QuestionType = "技术与科技"
 )
@@ -26,8 +25,6 @@ func GetQuestionType(chineseType string) QuestionType {
 		return HistoryMystery
 	case "电影与文学":
 		return MovieLiterature
-	case "动物界":
-		return AnimalWorld
 	case "谜语与字谜":
 		return Riddles
 	case "技术与科技":
@@ -51,8 +48,6 @@ func main() {
 		fmt.Println("这是一个历史谜题。")
 	case MovieLiterature:
 		fmt.Println("这是一个电影与文学问题。")
-	case AnimalWorld:
-		fmt.Println("这是一个动物界问题。")
 	case Riddles:
 		fmt.Println("这是一个谜语与字谜。")
 	case Technology:

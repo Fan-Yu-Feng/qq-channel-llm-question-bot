@@ -28,7 +28,7 @@ func (p Processor) ProcessMessage(input string, data *dto.WSATMessageData) error
 	}
 	var answer string
 	if strings.Contains(cmd, "答案") {
-		answer = strings.TrimPrefix(cmd, "答案")
+		answer = strings.Replace(input, "/答案", "", 1) // 使用1表示只替换第一个匹配项
 		cmd = "答案"
 	}
 	if dict.GetAnswerType(cmd) != "-1" {

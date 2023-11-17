@@ -69,8 +69,7 @@ func GetLlmMsg(userMsg string) (string, error) {
 	messageList, _ := messageHistory.Messages(ctx)
 	// 根据上下文进行回答
 	var completion, callErr = llm.Call(ctx, messageList,
-		llms.WithTemperature(0.5),
-		llms.WithStopWords([]string{"Armstrong"}),
+		llms.WithTemperature(0.9),
 	)
 	if callErr != nil {
 		log.Println(err)
