@@ -12,6 +12,7 @@ import (
 	"gopkg.in/yaml.v3"
 	"io/ioutil"
 	"log"
+	"os"
 	"path"
 	"process"
 	"runtime"
@@ -21,19 +22,19 @@ import (
 
 var processor process.Processor
 
-func initBaiDuEnv(baiduAppKey string, baiduSecretKey string) {
-
+func openAiEnv(openAIKey string) {
+	os.Setenv("OPENAI_API_KEY", openAIKey)
 }
 
 // 入口
 func main() {
 	configName := "config.yaml"
 	// 获取配置文件中的 appId 和 token 信息
-	appId, tokenStr, baiDuAppKey, baiDuSecretKey, err := getConfigInfo(configName)
+	appId, tokenStr, openAIKey, err := getConfigInfo(configName)
 	if err != nil {
 		log.Fatal(err)
 	}
-	initBaiDuEnv(baiDuAppKey, baiDuSecretKey)
+	openAiEnv(openAIKey)
 	botToken := token.BotToken(appId, tokenStr)
 
 	// 沙箱
@@ -65,7 +66,7 @@ func main() {
 }
 
 // 获取配置文件中的信息
-func getConfigInfo(fileName string) (uint64, string, string, string, error) {
+func getConfigInfo(fileName string) (uint64, string, string, error) {
 	// 获取当前go程调用栈所执行的函数的文件和行号信息
 	// 忽略pc和line
 	_, filePath, _, ok := runtime.Caller(1)
@@ -75,23 +76,20 @@ func getConfigInfo(fileName string) (uint64, string, string, string, error) {
 	}
 	file := fmt.Sprintf("%s/%s", path.Dir(filePath), fileName)
 	var conf struct {
-		AppID uint64 `yaml:"appid"`
-		Token string `yaml:"token"`
-		Baidu struct {
-			AppKey    string `yaml:"appKey"`
-			SecretKey string `yaml:"SecretKey"`
-		} `yaml:"baidu"`
+		AppID     uint64 `yaml:"appid"`
+		Token     string `yaml:"token"`
+		OpenAIKey string `yaml:"openAIKey"`
 	}
 	content, err := ioutil.ReadFile(file)
 	if err != nil {
 		log.Print("ioutil.ReadFile() 读取失败")
-		return 0, "", "", "", err
+		return 0, "", "", err
 	}
 	if err = yaml.Unmarshal(content, &conf); err != nil {
 		log.Print("yaml.Unmarshal(content, &conf) 读取失败")
-		return 0, "", "", "", err
+		return 0, "", "", err
 	}
-	return conf.AppID, conf.Token, conf.Baidu.AppKey, conf.Baidu.SecretKey, nil
+	return conf.AppID, conf.Token, conf.OpenAIKey, nil
 }
 
 // ATMessageEventHandler 实现处理 at 消息的回调
