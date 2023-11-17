@@ -3,6 +3,8 @@
 
 ## 使用说明
 
+### 配置文件
+
 将 `config_template.yaml` 复制为 `config.yaml` 将您的配置信息配置上去
 
 ```yaml
@@ -12,7 +14,7 @@ token : "qq渠道机器人token"
 openAIKey : "open api key"
 ```
 
-### 环境变量
+### 开发环境
 
 - [Go](https://golang.google.cn/doc/install)：1.21
 
