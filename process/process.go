@@ -77,7 +77,7 @@ func processAnswerMsg(cmd string, answer string) string {
 	switch cmd {
 	case "答案":
 		prompt := prompts.NewPromptTemplate(
-			"你好，我的答案是 {{.answer}}",
+			"你好，我的答案是{{.answer}}",
 			[]string{"answer"},
 		)
 		result, _ := prompt.Format(map[string]any{

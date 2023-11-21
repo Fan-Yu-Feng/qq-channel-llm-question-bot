@@ -23,7 +23,10 @@ import (
 var processor process.Processor
 
 func openAiEnv(openAIKey string) {
-	os.Setenv("OPENAI_API_KEY", openAIKey)
+	err := os.Setenv("OPENAI_API_KEY", openAIKey)
+	if err != nil {
+		return
+	}
 }
 
 // 入口

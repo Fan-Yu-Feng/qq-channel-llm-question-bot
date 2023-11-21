@@ -72,7 +72,9 @@ func GetLlmMsg(userMsg string) (string, error) {
 		llms.WithTemperature(0.9),
 	)
 	if callErr != nil {
-		log.Println(err)
+		log.Println(callErr)
+		return "调用openAI出现异常，请联系管理员进行排查！", callErr
+
 	}
 	log.Println(completion)
 	// 添加机器人的回复
